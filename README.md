@@ -19,7 +19,7 @@ In addition, this project will include:
 
 This app will consist of a single page containing 12 styled cards with pictures of dogs on them.  Additionally, there will be a link to the instructions modal and links to the game's Github page, my personal linkedin page, and eventually, a link to my personal website.  
 
-![wireframes](images/js_wireframe.jpeg)
+![wireframes](images/PACK.png)
 
 ### Architecture and Technologies
 
