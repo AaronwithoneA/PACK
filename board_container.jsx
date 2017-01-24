@@ -1,8 +1,18 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import Board from './board';
+import {receiveCard, removeCard} from './actions';
 
-const BoardContainer = () => {
-  return <div>fhfhfhfhghfhhghg</div>;
-};
+const mapStateToProps = state => ({
+  setNumber: state.setNumber
+});
 
+const mapDispatchToProps = dispatch => ({
+  receiveCard: receiveCard,
+  removeCard: removeCard
+});
 
-export default BoardContainer;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Board);

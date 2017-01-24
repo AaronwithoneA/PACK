@@ -13,6 +13,7 @@ const App = ({store}) => (
 
 document.addEventListener('DOMContentLoaded', () => {
     let store = configureStore();
+		window.store = store;
     const root = document.getElementById('root');
     ReactDOM.render(<App store={store} />, root);
 });

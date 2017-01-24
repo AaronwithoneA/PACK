@@ -67,18 +67,19 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var App = function App(_ref) {
-	  var store = _ref.store;
-	  return _react2.default.createElement(
-	    _reactRedux.Provider,
-	    { store: store },
-	    _react2.default.createElement(_board_container2.default, null)
-	  );
+		var store = _ref.store;
+		return _react2.default.createElement(
+			_reactRedux.Provider,
+			{ store: store },
+			_react2.default.createElement(_board_container2.default, null)
+		);
 	};
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	  var store = (0, _store2.default)();
-	  var root = document.getElementById('root');
-	  _reactDom2.default.render(_react2.default.createElement(App, { store: store }), root);
+		var store = (0, _store2.default)();
+		window.store = store;
+		var root = document.getElementById('root');
+		_reactDom2.default.render(_react2.default.createElement(App, { store: store }), root);
 	});
 
 /***/ },
@@ -22587,10 +22588,15 @@
 	
 	var _cards_reducer2 = _interopRequireDefault(_cards_reducer);
 	
+	var _set_number_reducer = __webpack_require__(308);
+	
+	var _set_number_reducer2 = _interopRequireDefault(_set_number_reducer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var rootReducer = (0, _redux.combineReducers)({
-	  cards: _cards_reducer2.default
+	  cards: _cards_reducer2.default,
+	  setNumber: _set_number_reducer2.default
 	});
 	
 	exports.default = rootReducer;
@@ -22609,17 +22615,30 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRedux = __webpack_require__(289);
+	
+	var _board = __webpack_require__(306);
+	
+	var _board2 = _interopRequireDefault(_board);
+	
+	var _actions = __webpack_require__(307);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var BoardContainer = function BoardContainer() {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    'fhfhfhfhghfhhghg'
-	  );
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    setNumber: state.setNumber
+	  };
 	};
 	
-	exports.default = BoardContainer;
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    receiveCard: _actions.receiveCard,
+	    removeCard: _actions.removeCard
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_board2.default);
 
 /***/ },
 /* 202 */
@@ -22631,7 +22650,7 @@
 	  value: true
 	});
 	
-	var _card_actions = __webpack_require__(203);
+	var _actions = __webpack_require__(307);
 	
 	var _merge = __webpack_require__(204);
 	
@@ -22645,11 +22664,11 @@
 	
 	  Object.freeze(state);
 	  switch (action.type) {
-	    case _card_actions.RECEIVE_CARD:
+	    case _actions.RECEIVE_CARD:
 	      return (0, _merge2.default)({}, state, action.card);
-	    case _card_actions.RECEIVE_CARDS:
+	    case _actions.RECEIVE_CARDS:
 	      return action.cards;
-	    case _card_actions.REMOVE_CARD:
+	    case _actions.REMOVE_CARD:
 	      var newState = (0, _merge2.default)({}, state);
 	      delete newState[action.card.id];
 	      return newState;
@@ -22661,40 +22680,7 @@
 	exports.default = cardReducer;
 
 /***/ },
-/* 203 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var RECEIVE_CARD = exports.RECEIVE_CARD = "RECEIVE_CARD";
-	var RECEIVE_CARDS = exports.RECEIVE_CARDS = "RECEIVE_CARDS";
-	var REMOVE_CARD = exports.REMOVE_CARD = "REMOVE_CARD";
-	
-	var receiveCard = exports.receiveCard = function receiveCard(card) {
-	  return {
-	    type: RECEIVE_CARD,
-	    card: card
-	  };
-	};
-	
-	var receiveCards = exports.receiveCards = function receiveCards(cards) {
-	  return {
-	    type: RECEIVE_CARDS,
-	    cards: cards
-	  };
-	};
-	
-	var removeCard = exports.removeCard = function removeCard(card) {
-	  return {
-	    type: REMOVE_CARD,
-	    card: card
-	  };
-	};
-
-/***/ },
+/* 203 */,
 /* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -26557,6 +26543,225 @@
 	  verify(mapDispatchToProps, 'mapDispatchToProps', displayName);
 	  verify(mergeProps, 'mergeProps', displayName);
 	}
+
+/***/ },
+/* 306 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(177);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _card = __webpack_require__(309);
+	
+	var _card2 = _interopRequireDefault(_card);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Board = function (_React$Component) {
+	  _inherits(Board, _React$Component);
+	
+	  function Board(props) {
+	    _classCallCheck(this, Board);
+	
+	    var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
+	
+	    _this.state = {
+	      setNumber: 0,
+	      cardList: [{
+	        size: "small",
+	        position: "standing",
+	        color: "mixed",
+	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485286886/Small_standing_mixed_lmcfzp.jpg"
+	      }, {
+	        size: "small",
+	        position: "laying",
+	        color: "mixed",
+	        image: "https://cloudinary.com/console/media_library#/dialog/image/upload/small_laying_mixed_gonvr8"
+	      }, {
+	        size: "large",
+	        position: "laying",
+	        color: "mixed",
+	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485286005/large_laying_mixed_tbgpuo.jpg"
+	      }, {
+	        size: "medium",
+	        position: "laying",
+	        color: "mixed",
+	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485288630/medium_laying_mixed_vyjhcz.jpg"
+	      }, {
+	        size: "medium",
+	        position: "sitting",
+	        color: "mixed",
+	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485290695/medium_sitting_mixed_gngkqg.jpg"
+	      }, {
+	        size: "medium",
+	        position: "sitting",
+	        color: "light",
+	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485288085/medium_sitting_light_tdthn1.jpg"
+	      }, {
+	        size: "large",
+	        position: "standing",
+	        color: "dark",
+	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485286635/large_standing_dark_xiiswa.jpg"
+	      }, {
+	        size: "small",
+	        position: "laying",
+	        color: "dark",
+	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485286829/small_laying_dark_mmm1fr.jpg"
+	      }, {
+	        size: "small",
+	        position: "laying",
+	        color: "light",
+	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485287238/small_laying_light_widmmp.jpg"
+	      }, {
+	        size: "medium",
+	        position: "standing",
+	        color: "mixed",
+	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485287971/medum_standing_mixed_vmrode.jpg"
+	      }, {
+	        size: "small",
+	        position: "laying",
+	        color: "mixed",
+	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485287263/small_laying_mixed_splcjj.jpg"
+	      }, {
+	        size: "medium",
+	        position: "sitting",
+	        color: "mixed",
+	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485288262/medium_sitting_mixed_wklepv.png"
+	      }]
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Board, [{
+	    key: 'winningScenario',
+	    value: function winningScenario() {}
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps() {
+	      if (this.state.setNumber === 4) {
+	        this.winningScenario();
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          this.state.setNumber,
+	          '/4'
+	        ),
+	        this.state.cardList.forEach(function (card) {
+	          return _react2.default.createElement(_card2.default, { card: card,
+	            receiveCard: _this2.props.receiveCard,
+	            removeCard: _this2.props.removeCard });
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return Board;
+	}(_react2.default.Component);
+	
+	exports.default = Board;
+
+/***/ },
+/* 307 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var RECEIVE_CARD = exports.RECEIVE_CARD = "RECEIVE_CARD";
+	var RECEIVE_CARDS = exports.RECEIVE_CARDS = "RECEIVE_CARDS";
+	var REMOVE_CARD = exports.REMOVE_CARD = "REMOVE_CARD";
+	
+	var receiveCard = exports.receiveCard = function receiveCard(card) {
+	  return {
+	    type: RECEIVE_CARD,
+	    card: card
+	  };
+	};
+	
+	var receiveCards = exports.receiveCards = function receiveCards(cards) {
+	  return {
+	    type: RECEIVE_CARDS,
+	    cards: cards
+	  };
+	};
+	
+	var removeCard = exports.removeCard = function removeCard(card) {
+	  return {
+	    type: REMOVE_CARD,
+	    card: card
+	  };
+	};
+
+/***/ },
+/* 308 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _actions = __webpack_require__(307);
+	
+	var _merge = __webpack_require__(204);
+	
+	var _merge2 = _interopRequireDefault(_merge);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var setNumberReducer = function setNumberReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+	
+	  Object.freeze(state);
+	  var newState = (0, _merge2.default)({}, state);
+	  switch (action.type) {
+	    case _actions.MATCH:
+	      if (state.setNumber === 4) {
+	        newState = 0;
+	      }
+	      newState += 1;
+	      return newState;
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = setNumberReducer;
+
+/***/ },
+/* 309 */
+/***/ function(module, exports) {
+
+	"use strict";
 
 /***/ }
 /******/ ]);

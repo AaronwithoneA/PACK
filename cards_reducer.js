@@ -1,4 +1,4 @@
-import { RECEIVE_CARD, RECEIVE_CARDS, REMOVE_CARD } from './card_actions';
+import { RECEIVE_CARD, RECEIVE_CARDS, REMOVE_CARD } from './actions';
 import merge from 'lodash/merge';
 
 const cardReducer = (state = [], action) => {
