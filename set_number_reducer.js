@@ -1,7 +1,7 @@
 import { MATCH } from './actions';
 import merge from 'lodash/merge';
 
-const setNumberReducer = (state = [], action) => {
+const setNumberReducer = (state = 0, action) => {
   Object.freeze(state);
   let newState = merge({}, state);
   switch(action.type) {

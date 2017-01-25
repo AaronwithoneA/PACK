@@ -1,0 +1,109 @@
+.card-image {
+  width: 250px;
+  height: 160px;
+  border-radius: 10px;
+  margin: 25px;
+  object-fit: cover;
+}
+
+.card-image-clicked {
+
+  /*filter: grayscale(100%);*/
+  filter: contrast(200%) drop-shadow(4px 4px 5px black);
+  width: 250px;
+  height: 160px;
+  border-radius: 10px;
+  margin: 25px;
+  object-fit: cover;
+}
+
+.card-image:hover {
+  cursor: pointer;
+  -webkit-animation: spin 10s infinite linear;
+  transform: scale(1.9);
+  z-index: 1;
+}
+
+.card-image:action {
+  opacity: .5;
+}
+
+@-webkit-keyframes spin {
+    0%  {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(360deg);}
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap
+}
+
+.properties {
+  position: relative;
+  bottom: 130px;
+  left: 75px;
+  opacity: 0;
+}
+
+.properties:hover {
+  opacity: 1.0;
+  z-index: 9999999999999;
+}
+
+.modal-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 25px;
+  font-family: serif;
+}
+
+.modal-row-1 {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-title {
+  display: flex;
+  text-align: center;
+  font-family: inherit;
+}
+
+.attribute-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  font-family: serif;
+}
+
+.attribute-list-container {
+  width: 100%;
+}
+
+.modal-button {
+  width: 250px;
+  min-width: 250px;
+  border: none;
+  border-bottom: 1px solid black;
+  font-family: serif;
+  font-size: 17px;
+  background: transparent;
+  outline: none;
+}
+
+.modal-button:hover {
+  transform: scale(1.2);
+}
+
+.modal-bar {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  margin: 15px 0 0 0;
+}
