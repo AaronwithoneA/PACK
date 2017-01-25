@@ -10,12 +10,13 @@ class Card extends React.Component {
     };
   }
 
-  // componentDidUpdate() {
-  //   console.log(this.props.cards);
-  //   if (this.props.cards.length === 0) {
-  //     this.setState({clicked: false});
-  //   }
-  // }
+  componentWillReceiveProps() {
+    console.log(this.props.cards);
+    if (this.props.cards.length === 0) {
+      setTimeout(() => this.setState({clicked: false}), 2000);
+    }
+  }
+
   handleClick () {
     if (this.state.clicked === false) {
       this.setState({clicked: true});

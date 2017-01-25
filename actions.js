@@ -1,6 +1,7 @@
 export const RECEIVE_CARD = "RECEIVE_CARD";
 export const RESET_CARDS = "RESET_CARDS";
 export const REMOVE_CARD = "REMOVE_CARD";
+export const INCREASE_PACK_COUNT = "INCREASE_PACK_COUNT"
 
 export const receiveCard = card => ({
   type: RECEIVE_CARD,
@@ -14,4 +15,8 @@ export const resetCards = () => ({
 export const removeCard = card => ({
   type: REMOVE_CARD,
   card
+});
+
+export const increasePackCount = () => ({
+  type: INCREASE_PACK_COUNT
 });

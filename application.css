@@ -86,6 +86,10 @@
   width: 100%;
 }
 
+.title {
+
+}
+
 .modal-button {
   width: 250px;
   min-width: 250px;
@@ -103,7 +107,9 @@
 
 .modal-bar {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center
   height: 30px;
   margin: 15px 0 0 0;
 }

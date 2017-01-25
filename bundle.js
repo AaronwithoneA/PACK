@@ -22667,6 +22667,7 @@
 	var RECEIVE_CARD = exports.RECEIVE_CARD = "RECEIVE_CARD";
 	var RESET_CARDS = exports.RESET_CARDS = "RESET_CARDS";
 	var REMOVE_CARD = exports.REMOVE_CARD = "REMOVE_CARD";
+	var INCREASE_PACK_COUNT = exports.INCREASE_PACK_COUNT = "INCREASE_PACK_COUNT";
 	
 	var receiveCard = exports.receiveCard = function receiveCard(card) {
 	  return {
@@ -22685,6 +22686,12 @@
 	  return {
 	    type: REMOVE_CARD,
 	    card: card
+	  };
+	};
+	
+	var increasePackCount = exports.increasePackCount = function increasePackCount() {
+	  return {
+	    type: INCREASE_PACK_COUNT
 	  };
 	};
 
@@ -25379,9 +25386,9 @@
 	  var action = arguments[1];
 	
 	  Object.freeze(state);
-	  var newState = (0, _merge2.default)({}, state);
+	  var newState = state;
 	  switch (action.type) {
-	    case _actions.MATCH:
+	    case _actions.INCREASE_PACK_COUNT:
 	      if (state.setNumber === 4) {
 	        newState = 0;
 	      }
@@ -26631,6 +26638,9 @@
 	    },
 	    removeCard: function removeCard(card) {
 	      return dispatch((0, _actions.removeCard)(card));
+	    },
+	    increasePackCount: function increasePackCount() {
+	      return dispatch((0, _actions.increasePackCount)());
 	    }
 	  };
 	};
@@ -26775,19 +26785,20 @@
 	      return "<";
 	    }
 	  }, {
-	    key: 'winningCondition',
-	    value: function winningCondition() {
+	    key: 'validPack',
+	    value: function validPack() {
 	      console.log("match!");
+	      this.props.increasePackCount();
+	      console.log(this.props.setNumber);
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
 	      if (this.checkMatch() === "<") {
-	        console.log("less than 3");
 	        return;
 	      } else if (this.checkMatch()) {
 	        this.props.resetCards();
-	        this.winningCondition();
+	        this.validPack();
 	        this.forceUpdate();
 	      } else {
 	        this.props.resetCards();
@@ -26806,14 +26817,27 @@
 	        null,
 	        _react2.default.createElement(
 	          'div',
-	          null,
-	          _react2.default.createElement(_modal2.default, { className: 'modal' })
+	          { className: 'title-box' },
+	          _react2.default.createElement(
+	            'title',
+	            { className: 'title' },
+	            'PACK'
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          null,
-	          this.props.setNumber,
-	          '/4'
+	          { className: 'nav' },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            this.props.setNumber,
+	            '/4'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(_modal2.default, { className: 'modal' })
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -26874,15 +26898,19 @@
 	    return _this;
 	  }
 	
-	  // componentDidUpdate() {
-	  //   console.log(this.props.cards);
-	  //   if (this.props.cards.length === 0) {
-	  //     this.setState({clicked: false});
-	  //   }
-	  // }
-	
-	
 	  _createClass(Card, [{
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps() {
+	      var _this2 = this;
+	
+	      console.log(this.props.cards);
+	      if (this.props.cards.length === 0) {
+	        setTimeout(function () {
+	          return _this2.setState({ clicked: false });
+	        }, 2000);
+	      }
+	    }
+	  }, {
 	    key: "handleClick",
 	    value: function handleClick() {
 	      if (this.state.clicked === false) {
@@ -28345,7 +28373,9 @@
 	          {
 	            className: 'modal-button',
 	            onClick: this.openModal },
-	          'How To Play Pack'
+	          'Pack',
+	          _react2.default.createElement('br', null),
+	          'How To Play'
 	        ),
 	        _react2.default.createElement(
 	          _reactModal2.default,

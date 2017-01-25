@@ -112,23 +112,24 @@ class Board extends React.Component {
     return "<";
   }
 
-  winningCondition () {
+  validPack () {
     console.log("match!");
+    this.props.increasePackCount();
+    console.log(this.props.setNumber);
   }
 
   componentDidUpdate () {
     if (this.checkMatch() === "<") {
-      console.log("less than 3")
-      return
+      return;
     }
     else if (this.checkMatch()) {
       this.props.resetCards();
-      this.winningCondition();
-      this.forceUpdate()
+      this.validPack();
+      this.forceUpdate();
     }
     else {
       this.props.resetCards();
-      console.log("not a match")
+      console.log("not a match");
       this.forceUpdate();
     }
   }
@@ -139,10 +140,13 @@ class Board extends React.Component {
     console.log(this.props.cards);
     return(
       <div>
-        <div><InstructionsModal className='modal'/></div>
-        <div>
-          {this.props.setNumber}/4
-        </div >
+        <div className='title-box'>
+          <title className='title'>PACK</title>
+        </div>
+        <div className='nav'>
+          <div>{this.props.setNumber}/4</div>
+          <div><InstructionsModal className='modal'/></div>
+        </div>
         <div className="cards-container">
           {this.state.cardList.map((card, i) => (
             <Card card={card}
