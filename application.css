@@ -63,7 +63,8 @@ time, mark, audio, video {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  flex-wrap: wrap
+  flex-wrap: wrap;
+  position: absolute;
 }
 
 .properties {
@@ -170,4 +171,10 @@ time, mark, audio, video {
 .modal-bar {
   display: flex;
   margin: 8px 10px 0 10px;
+}
+
+#winning {
+  position: fixed;
+  background-color: transparent;
+  z-index: 0;
 }

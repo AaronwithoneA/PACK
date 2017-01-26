@@ -26769,12 +26769,6 @@
 	    return _this;
 	  }
 	
-	  // componentWillReceiveProps () {
-	  //   // if (this.state.setNumber === 4) {
-	  //   //   this.winningScenario();
-	  //   }
-	  // }
-	
 	  _createClass(Board, [{
 	    key: 'checkMatch',
 	    value: function checkMatch() {
@@ -26797,16 +26791,19 @@
 	      return "<";
 	    }
 	  }, {
-	    key: 'gameOver',
-	    value: function gameOver() {}
-	  }, {
 	    key: 'validPack',
 	    value: function validPack() {
-	      console.log("match!");
+	      var _this2 = this;
+	
 	      this.props.increasePackCount();
-	      if (this.props.setNumber === 4) {
-	        this.gameOver();
-	      }
+	      setTimeout(function () {
+	        console.log(_this2.props.setNumber);
+	        if (_this2.props.setNumber === 4) {
+	          _this2.props.clearCount();
+	          _this2.gameOver();
+	          _this2.forceUpdate();
+	        }
+	      }, 2000);
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
@@ -26818,15 +26815,16 @@
 	        this.validPack();
 	      } else {
 	        this.props.resetCards();
-	        console.log("not a match");
 	      }
 	    }
 	  }, {
+	    key: 'gameOver',
+	    value: function gameOver() {}
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
+	      var _this3 = this;
 	
-	      console.log(this.props.cards);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -26868,11 +26866,10 @@
 	          this.state.cardList.map(function (card, i) {
 	            return _react2.default.createElement(_card2.default, { card: card,
 	              key: i,
-	              receiveCard: _this2.props.receiveCard,
-	              removeCard: _this2.props.removeCard,
-	              setNumber: _this2.props.setNumber,
-	              clearCount: _this2.props.clearCount,
-	              cards: _this2.props.cards });
+	              receiveCard: _this3.props.receiveCard,
+	              removeCard: _this3.props.removeCard,
+	              setNumber: _this3.props.setNumber,
+	              cards: _this3.props.cards });
 	          })
 	        )
 	      );
@@ -26928,21 +26925,12 @@
 	    value: function componentWillUpdate() {
 	      var _this2 = this;
 	
-	      console.log(this.props.cards);
-	      console.log(this.props.setNumber);
 	      if (this.props.cards.length > 2) {
 	        setTimeout(function () {
 	          _this2.setState({ clicked: false });
-	          if (_this2.props.setNumber === 4) {
-	            _this2.props.clearCount();
-	          }
-	          _this2.gameOver();
 	        }, 2000);
 	      }
 	    }
-	  }, {
-	    key: "gameOver",
-	    value: function gameOver() {}
 	  }, {
 	    key: "handleClick",
 	    value: function handleClick() {

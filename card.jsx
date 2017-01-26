@@ -11,20 +11,11 @@ class Card extends React.Component {
   }
 
   componentWillUpdate() {
-    console.log(this.props.cards);
-    console.log(this.props.setNumber);
     if (this.props.cards.length > 2) {
       setTimeout(() => {
         this.setState({clicked: false});
-        if(this.props.setNumber === 4) {
-          this.props.clearCount();
-        }
-        this.gameOver();}, 2000);
+      }, 2000);
     }
-  }
-
-  gameOver () {
-
   }
 
   handleClick () {

@@ -83,12 +83,6 @@ class Board extends React.Component {
     };
   }
 
-  // componentWillReceiveProps () {
-  //   // if (this.state.setNumber === 4) {
-  //   //   this.winningScenario();
-  //   }
-  // }
-
   checkMatch() {
     if (this.props.cards.length > 2) {
       const cards = this.props.cards;
@@ -112,16 +106,16 @@ class Board extends React.Component {
     return "<";
   }
 
-  gameOver () {
-
-  }
-
   validPack () {
-    console.log("match!");
     this.props.increasePackCount();
-    if (this.props.setNumber === 4) {
-      this.gameOver();
-    }
+    setTimeout(() => {
+      console.log(this.props.setNumber);
+      if (this.props.setNumber === 4) {
+        this.props.clearCount();
+        this.gameOver();
+        this.forceUpdate();
+      }
+    }, 2000);
   }
 
   componentDidUpdate () {
@@ -134,12 +128,14 @@ class Board extends React.Component {
     }
     else {
       this.props.resetCards();
-      console.log("not a match");
     }
   }
 
+  gameOver () {
+    
+  }
+
   render () {
-    console.log(this.props.cards);
     return(
       <div>
         <div className='header-container'>
@@ -161,7 +157,6 @@ class Board extends React.Component {
               receiveCard={this.props.receiveCard}
               removeCard={this.props.removeCard}
               setNumber={this.props.setNumber}
-              clearCount={this.props.clearCount}
               cards={this.props.cards}/>))}
         </div>
       </div>
