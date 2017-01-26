@@ -26704,6 +26704,7 @@
 	    var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
 	
 	    _this.state = {
+	      status: "game",
 	      cardList: [{
 	        size: "small",
 	        position: "standing",
@@ -26803,7 +26804,7 @@
 	          _this2.gameOver();
 	          _this2.forceUpdate();
 	        }
-	      }, 2000);
+	      }, 1500);
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
@@ -26819,11 +26820,18 @@
 	    }
 	  }, {
 	    key: 'gameOver',
-	    value: function gameOver() {}
+	    value: function gameOver() {
+	      var _this3 = this;
+	
+	      this.setState({ status: "game over" });
+	      setTimeout(function () {
+	        return _this3.setState({ status: "game" });
+	      }, 10000);
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
+	      var _this4 = this;
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -26866,10 +26874,11 @@
 	          this.state.cardList.map(function (card, i) {
 	            return _react2.default.createElement(_card2.default, { card: card,
 	              key: i,
-	              receiveCard: _this3.props.receiveCard,
-	              removeCard: _this3.props.removeCard,
-	              setNumber: _this3.props.setNumber,
-	              cards: _this3.props.cards });
+	              receiveCard: _this4.props.receiveCard,
+	              removeCard: _this4.props.removeCard,
+	              setNumber: _this4.props.setNumber,
+	              cards: _this4.props.cards,
+	              status: _this4.state.status });
 	          })
 	        )
 	      );
@@ -26928,7 +26937,7 @@
 	      if (this.props.cards.length > 2) {
 	        setTimeout(function () {
 	          _this2.setState({ clicked: false });
-	        }, 2000);
+	        }, 1500);
 	      }
 	    }
 	  }, {
@@ -26948,7 +26957,15 @@
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      if (this.state.clicked === false) {
+	      if (this.props.status === "game over") {
+	        return _react2.default.createElement(
+	          "div",
+	          { className: "card-box" },
+	          _react2.default.createElement("img", { className: "card-image-game-over",
+	            src: this.props.card.image,
+	            onClick: this.handleClick })
+	        );
+	      } else if (this.state.clicked === false) {
 	        return _react2.default.createElement(
 	          "div",
 	          { className: "card-box" },

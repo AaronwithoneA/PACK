@@ -14,7 +14,7 @@ class Card extends React.Component {
     if (this.props.cards.length > 2) {
       setTimeout(() => {
         this.setState({clicked: false});
-      }, 2000);
+      }, 1500);
     }
   }
 
@@ -33,7 +33,17 @@ class Card extends React.Component {
 
 
   render () {
-    if (this.state.clicked === false) {
+    if (this.props.status === "game over") {
+      return (
+        <div className="card-box">
+          <img className="card-image-game-over"
+            src={this.props.card.image}
+            onClick={this.handleClick}>
+          </img>
+        </div>
+      );
+    }
+    else if (this.state.clicked === false) {
       return (
         <div className="card-box">
           <img className="card-image"

@@ -50,6 +50,17 @@ time, mark, audio, video {
   z-index: 1;
 }
 
+.card-image-game-over {
+  width: 250px;
+  height: 160px;
+  border-radius: 10px;
+  margin: 25px;
+  object-fit: cover;
+  -webkit-animation: spin 10s infinite linear;
+  filter: contrast(200%) drop-shadow(4px 4px 5px black);
+
+}
+
 .card-image:action {
   opacity: .5;
 }

@@ -7,6 +7,7 @@ class Board extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      status: "game",
       cardList: [{
         size: "small",
         position: "standing",
@@ -115,7 +116,7 @@ class Board extends React.Component {
         this.gameOver();
         this.forceUpdate();
       }
-    }, 2000);
+    }, 1500);
   }
 
   componentDidUpdate () {
@@ -132,7 +133,8 @@ class Board extends React.Component {
   }
 
   gameOver () {
-    
+    this.setState({status: "game over"});
+    setTimeout(() => this.setState({status: "game"}), 10000);
   }
 
   render () {
@@ -157,7 +159,8 @@ class Board extends React.Component {
               receiveCard={this.props.receiveCard}
               removeCard={this.props.removeCard}
               setNumber={this.props.setNumber}
-              cards={this.props.cards}/>))}
+              cards={this.props.cards}
+              status={this.state.status}/>))}
         </div>
       </div>
     );
