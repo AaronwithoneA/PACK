@@ -45,20 +45,43 @@ class Card extends React.Component {
     }
     else if (this.state.clicked === false) {
       return (
-        <div className="card-box">
+        <div onClick={this.handleClick} className="card-box">
           <img className="card-image"
-            src={this.props.card.image}
-            onClick={this.handleClick}>
+            src={this.props.card.image}>
+          </img>
+          <div className="clicked-attributes">
+            {this.props.card.size}
+            <br/>
+            {this.props.card.position}
+            <br/>
+            {this.props.card.color}
+          </div>
+        </div>
+      );
+    }
+    else if (this.props.match === "yes") {
+      return (
+        <div className="card-box">
+          <img className="card-image-match"
+            src={this.props.card.image}>
+          </img>
+        </div>
+      );
+    }
+    else if (this.props.match === "no") {
+      return (
+        <div className="card-box">
+          <img className="card-image-no-match"
+            src={this.props.card.image}>
           </img>
         </div>
       );
     }
     else {
       return (
-        <div className="card-box">
+        <div onClick={this.handleClick}className="card-box">
           <img className="card-image-clicked"
-            src={this.props.card.image}
-            onClick={this.handleClick}>
+            src={this.props.card.image}>
           </img>
         </div>
       );

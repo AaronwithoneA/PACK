@@ -37,7 +37,7 @@ class InstructionsModal extends React.Component {
         display         : 'flex',
         'border-radius' :  '10px',
         'box-shadow'    :  '0px 3px 7px black',
-        'background-color' : 'lightgrey'
+        'background-color' : '#DCDCDC'
 
       }
     };
@@ -85,23 +85,9 @@ class InstructionsModal extends React.Component {
                   <br/><br/>
                 </ul>
                 <div className='additional-instructions'>
-                Packs can consist of a small dog, a medium dog, and a large dog
-                <br/>
-                <br/>
-                Or three large dogs
-                <br/>
-                <br/>
-                Or three sitting dogs
-                <br/>
-                <br/>
-                Or a standing dog, a sitting dog, and a laying down dog
-                <br/>
-                <br/>
-                Two small dogs and a large dog don't make a pack
-                <br/>
-                <br/>
-                The rules apply to ALL THREE attributes for each pack
-
+                  A pack contains 3 dogs, where each of the attributes
+                  are either the same across three dogs, or completely
+                  different
                 </div>
               </div>
             </div>

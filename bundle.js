@@ -26705,6 +26705,7 @@
 	
 	    _this.state = {
 	      status: "game",
+	      match: "",
 	      cardList: [{
 	        size: "small",
 	        position: "standing",
@@ -26767,6 +26768,9 @@
 	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485288262/medium_sitting_mixed_wklepv.png"
 	      }]
 	    };
+	    _this.setState({ cardsList: _this.state.cardList.sort(function () {
+	        return .5 - Math.random();
+	      }) });
 	    return _this;
 	  }
 	
@@ -26802,6 +26806,9 @@
 	        if (_this2.props.setNumber === 4) {
 	          _this2.props.clearCount();
 	          _this2.gameOver();
+	          _this2.setState({ cardsList: _this2.state.cardList.sort(function () {
+	              return .5 - Math.random();
+	            }) });
 	          _this2.forceUpdate();
 	        }
 	      }, 1500);
@@ -26809,29 +26816,39 @@
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
+	      var _this3 = this;
+	
 	      if (this.checkMatch() === "<") {
 	        return;
 	      } else if (this.checkMatch()) {
+	        this.setState({ match: "yes" });
+	        setTimeout(function () {
+	          return _this3.setState({ match: "" });
+	        }, 2000);
 	        this.props.resetCards();
 	        this.validPack();
 	      } else {
 	        this.props.resetCards();
+	        this.setState({ match: "no" });
+	        setTimeout(function () {
+	          return _this3.setState({ match: "" });
+	        }, 2000);
 	      }
 	    }
 	  }, {
 	    key: 'gameOver',
 	    value: function gameOver() {
-	      var _this3 = this;
+	      var _this4 = this;
 	
 	      this.setState({ status: "game over" });
 	      setTimeout(function () {
-	        return _this3.setState({ status: "game" });
+	        return _this4.setState({ status: "game" });
 	      }, 10000);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this4 = this;
+	      var _this5 = this;
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -26874,11 +26891,12 @@
 	          this.state.cardList.map(function (card, i) {
 	            return _react2.default.createElement(_card2.default, { card: card,
 	              key: i,
-	              receiveCard: _this4.props.receiveCard,
-	              removeCard: _this4.props.removeCard,
-	              setNumber: _this4.props.setNumber,
-	              cards: _this4.props.cards,
-	              status: _this4.state.status });
+	              receiveCard: _this5.props.receiveCard,
+	              removeCard: _this5.props.removeCard,
+	              setNumber: _this5.props.setNumber,
+	              cards: _this5.props.cards,
+	              status: _this5.state.status,
+	              match: _this5.state.match });
 	          })
 	        )
 	      );
@@ -26968,18 +26986,39 @@
 	      } else if (this.state.clicked === false) {
 	        return _react2.default.createElement(
 	          "div",
-	          { className: "card-box" },
+	          { onClick: this.handleClick, className: "card-box" },
 	          _react2.default.createElement("img", { className: "card-image",
-	            src: this.props.card.image,
-	            onClick: this.handleClick })
+	            src: this.props.card.image }),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "clicked-attributes" },
+	            this.props.card.size,
+	            _react2.default.createElement("br", null),
+	            this.props.card.position,
+	            _react2.default.createElement("br", null),
+	            this.props.card.color
+	          )
+	        );
+	      } else if (this.props.match === "yes") {
+	        return _react2.default.createElement(
+	          "div",
+	          { className: "card-box" },
+	          _react2.default.createElement("img", { className: "card-image-match",
+	            src: this.props.card.image })
+	        );
+	      } else if (this.props.match === "no") {
+	        return _react2.default.createElement(
+	          "div",
+	          { className: "card-box" },
+	          _react2.default.createElement("img", { className: "card-image-no-match",
+	            src: this.props.card.image })
 	        );
 	      } else {
 	        return _react2.default.createElement(
 	          "div",
-	          { className: "card-box" },
+	          { onClick: this.handleClick, className: "card-box" },
 	          _react2.default.createElement("img", { className: "card-image-clicked",
-	            src: this.props.card.image,
-	            onClick: this.handleClick })
+	            src: this.props.card.image })
 	        );
 	      }
 	    }
@@ -28382,7 +28421,7 @@
 	        display: 'flex',
 	        'border-radius': '10px',
 	        'box-shadow': '0px 3px 7px black',
-	        'background-color': 'lightgrey'
+	        'background-color': '#DCDCDC'
 	
 	      }
 	    };
@@ -28466,22 +28505,7 @@
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'additional-instructions' },
-	                'Packs can consist of a small dog, a medium dog, and a large dog',
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement('br', null),
-	                'Or three large dogs',
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement('br', null),
-	                'Or three sitting dogs',
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement('br', null),
-	                'Or a standing dog, a sitting dog, and a laying down dog',
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement('br', null),
-	                'Two small dogs and a large dog don\'t make a pack',
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement('br', null),
-	                'The rules apply to ALL THREE attributes for each pack'
+	                'A pack contains 3 dogs, where each of the attributes are either the same across three dogs, or completely different'
 	              )
 	            )
 	          )

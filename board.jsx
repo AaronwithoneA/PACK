@@ -8,6 +8,7 @@ class Board extends React.Component {
     super(props);
     this.state = {
       status: "game",
+      match: "",
       cardList: [{
         size: "small",
         position: "standing",
@@ -82,6 +83,8 @@ class Board extends React.Component {
       },
       ]
     };
+    this.setState({cardsList: this.state.cardList.sort(
+      () => .5 - Math.random())});
   }
 
   checkMatch() {
@@ -114,6 +117,8 @@ class Board extends React.Component {
       if (this.props.setNumber === 4) {
         this.props.clearCount();
         this.gameOver();
+        this.setState({cardsList: this.state.cardList.sort(
+          () => .5 - Math.random())});
         this.forceUpdate();
       }
     }, 1500);
@@ -124,11 +129,15 @@ class Board extends React.Component {
       return;
     }
     else if (this.checkMatch()) {
+      this.setState({match: "yes"});
+      setTimeout(() => this.setState({match: ""}), 2000);
       this.props.resetCards();
       this.validPack();
     }
     else {
       this.props.resetCards();
+      this.setState({match: "no"});
+      setTimeout(() => this.setState({match: ""}), 2000);
     }
   }
 
@@ -160,7 +169,8 @@ class Board extends React.Component {
               removeCard={this.props.removeCard}
               setNumber={this.props.setNumber}
               cards={this.props.cards}
-              status={this.state.status}/>))}
+              status={this.state.status}
+              match={this.state.match}/>))}
         </div>
       </div>
     );
