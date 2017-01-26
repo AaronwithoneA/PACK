@@ -22668,6 +22668,7 @@
 	var RESET_CARDS = exports.RESET_CARDS = "RESET_CARDS";
 	var REMOVE_CARD = exports.REMOVE_CARD = "REMOVE_CARD";
 	var INCREASE_PACK_COUNT = exports.INCREASE_PACK_COUNT = "INCREASE_PACK_COUNT";
+	var CLEAR_COUNT = exports.CLEAR_COUNT = "CLEAR_COUNT";
 	
 	var receiveCard = exports.receiveCard = function receiveCard(card) {
 	  return {
@@ -22692,6 +22693,12 @@
 	var increasePackCount = exports.increasePackCount = function increasePackCount() {
 	  return {
 	    type: INCREASE_PACK_COUNT
+	  };
+	};
+	
+	var clearCount = exports.clearCount = function clearCount() {
+	  return {
+	    type: CLEAR_COUNT
 	  };
 	};
 
@@ -25389,11 +25396,13 @@
 	  var newState = state;
 	  switch (action.type) {
 	    case _actions.INCREASE_PACK_COUNT:
-	      if (state.setNumber === 4) {
+	      if (state === 4) {
 	        newState = 0;
 	      }
 	      newState += 1;
 	      return newState;
+	    case _actions.CLEAR_COUNT:
+	      return 0;
 	    default:
 	      return state;
 	  }
@@ -26641,6 +26650,9 @@
 	    },
 	    increasePackCount: function increasePackCount() {
 	      return dispatch((0, _actions.increasePackCount)());
+	    },
+	    clearCount: function clearCount() {
+	      return dispatch((0, _actions.clearCount)());
 	    }
 	  };
 	};
@@ -26785,11 +26797,16 @@
 	      return "<";
 	    }
 	  }, {
+	    key: 'gameOver',
+	    value: function gameOver() {}
+	  }, {
 	    key: 'validPack',
 	    value: function validPack() {
 	      console.log("match!");
 	      this.props.increasePackCount();
-	      console.log(this.props.setNumber);
+	      if (this.props.setNumber === 4) {
+	        this.gameOver();
+	      }
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
@@ -26799,11 +26816,9 @@
 	      } else if (this.checkMatch()) {
 	        this.props.resetCards();
 	        this.validPack();
-	        this.forceUpdate();
 	      } else {
 	        this.props.resetCards();
 	        console.log("not a match");
-	        this.forceUpdate();
 	      }
 	    }
 	  }, {
@@ -26817,26 +26832,34 @@
 	        null,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'title-box' },
-	          _react2.default.createElement(
-	            'title',
-	            { className: 'title' },
-	            'PACK'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'nav' },
+	          { className: 'header-container' },
 	          _react2.default.createElement(
 	            'div',
-	            null,
-	            this.props.setNumber,
-	            '/4'
+	            { className: 'title-box' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'title' },
+	              'PACK'
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            null,
-	            _react2.default.createElement(_modal2.default, { className: 'modal' })
+	            { className: 'nav' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'pack-number-container' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'pack-number' },
+	                this.props.setNumber,
+	                ' / 4 Packs'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(_modal2.default, { className: 'modal' })
+	            )
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -26847,6 +26870,8 @@
 	              key: i,
 	              receiveCard: _this2.props.receiveCard,
 	              removeCard: _this2.props.removeCard,
+	              setNumber: _this2.props.setNumber,
+	              clearCount: _this2.props.clearCount,
 	              cards: _this2.props.cards });
 	          })
 	        )
@@ -26899,17 +26924,25 @@
 	  }
 	
 	  _createClass(Card, [{
-	    key: "componentWillReceiveProps",
-	    value: function componentWillReceiveProps() {
+	    key: "componentWillUpdate",
+	    value: function componentWillUpdate() {
 	      var _this2 = this;
 	
 	      console.log(this.props.cards);
-	      if (this.props.cards.length === 0) {
+	      console.log(this.props.setNumber);
+	      if (this.props.cards.length > 2) {
 	        setTimeout(function () {
-	          return _this2.setState({ clicked: false });
+	          _this2.setState({ clicked: false });
+	          if (_this2.props.setNumber === 4) {
+	            _this2.props.clearCount();
+	          }
+	          _this2.gameOver();
 	        }, 2000);
 	      }
 	    }
+	  }, {
+	    key: "gameOver",
+	    value: function gameOver() {}
 	  }, {
 	    key: "handleClick",
 	    value: function handleClick() {
@@ -28373,8 +28406,6 @@
 	          {
 	            className: 'modal-button',
 	            onClick: this.openModal },
-	          'Pack',
-	          _react2.default.createElement('br', null),
 	          'How To Play'
 	        ),
 	        _react2.default.createElement(

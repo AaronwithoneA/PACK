@@ -59,8 +59,6 @@ class InstructionsModal extends React.Component {
         <button
           className='modal-button'
           onClick={this.openModal}>
-          Pack
-        <br/>
         How To Play
         </button>
         <Modal

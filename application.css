@@ -1,3 +1,29 @@
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+ outline: none;
+ margin: 0;
+ padding: 0;
+ border: 0;
+ font-size: 100%;
+ font: inherit;
+ vertical-align: baseline;
+}
+
+
+
+
 .card-image {
   width: 250px;
   height: 160px;
@@ -86,19 +112,55 @@
   width: 100%;
 }
 
-.title {
+.title-box {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid black;
+  padding: 15px 0 5px 0;
+}
 
+.title {
+  color: black;
+  letter-spacing: 15px;
+  font-size: 23px;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.pack-number-container {
+  display: flex;
+  align-items: flex-end;
+  border: none;
+}
+
+.pack-number {
+  margin: 8px 10px 0 10px;
+  font-size: 17px;
+  font-family: serif;
+  box-sizing: border-box;
+  padding-bottom: 3px;
 }
 
 .modal-button {
-  width: 250px;
-  min-width: 250px;
   border: none;
-  border-bottom: 1px solid black;
   font-family: serif;
   font-size: 17px;
   background: transparent;
   outline: none;
+  box-sizing: border-box;
 }
 
 .modal-button:hover {
@@ -107,9 +169,5 @@
 
 .modal-bar {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center
-  height: 30px;
-  margin: 15px 0 0 0;
+  margin: 8px 10px 0 10px;
 }

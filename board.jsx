@@ -112,10 +112,16 @@ class Board extends React.Component {
     return "<";
   }
 
+  gameOver () {
+
+  }
+
   validPack () {
     console.log("match!");
     this.props.increasePackCount();
-    console.log(this.props.setNumber);
+    if (this.props.setNumber === 4) {
+      this.gameOver();
+    }
   }
 
   componentDidUpdate () {
@@ -125,34 +131,37 @@ class Board extends React.Component {
     else if (this.checkMatch()) {
       this.props.resetCards();
       this.validPack();
-      this.forceUpdate();
     }
     else {
       this.props.resetCards();
       console.log("not a match");
-      this.forceUpdate();
     }
   }
-
-
 
   render () {
     console.log(this.props.cards);
     return(
       <div>
-        <div className='title-box'>
-          <title className='title'>PACK</title>
+        <div className='header-container'>
+          <div className='title-box'>
+            <div className='title'>PACK</div>
+          </div>
+          <div className='nav'>
+            <div className="pack-number-container">
+              <div className='pack-number'>{this.props.setNumber} / 4 Packs</div>
+            </div>
+            <div><InstructionsModal className='modal'/></div>
+          </div>
         </div>
-        <div className='nav'>
-          <div>{this.props.setNumber}/4</div>
-          <div><InstructionsModal className='modal'/></div>
-        </div>
+
         <div className="cards-container">
           {this.state.cardList.map((card, i) => (
             <Card card={card}
               key={i}
               receiveCard={this.props.receiveCard}
               removeCard={this.props.removeCard}
+              setNumber={this.props.setNumber}
+              clearCount={this.props.clearCount}
               cards={this.props.cards}/>))}
         </div>
       </div>
