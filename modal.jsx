@@ -31,12 +31,13 @@ class InstructionsModal extends React.Component {
         zIndex          : 11,
         width           : '40%',
         'min-width'     : '450px',
-        height          : '400px',
+        height          : '550px',
         margin          : '0 auto',
         transform       : 'translate(-50%, -50%)',
         display         : 'flex',
         'border-radius' :  '10px',
-        'box-shadow'    :  '0px 3px 7px black'
+        'box-shadow'    :  '0px 3px 7px black',
+        'background-color' : 'lightgrey'
 
       }
     };
@@ -72,24 +73,32 @@ class InstructionsModal extends React.Component {
               <div className="description">
                 The goal of the game is to pick sets of 3 furry friends
                 who are either ALL the same or ALL different in each of
-                three attributes
+                three attributes:
               </div>
               <div className='attribute-list-container'>
                 <ul className="attribute-list">
-                  <li>Size (small, medium, large)</li>
-                  <li>Color (dark solid, light solid, mixed)</li>
-                  <li>Position (standing, sitting, laying down)</li>
+                  <li>Size   (small, medium, large)</li>
+                  <br/>
+                  <li>Color   (dark solid, light solid, mixed)</li>
+                  <br/>
+                  <li>Position   (standing, sitting, laying down)</li>
+                  <br/><br/>
                 </ul>
-                <div>
+                <div className='additional-instructions'>
                 Packs can consist of a small dog, a medium dog, and a large dog
+                <br/>
                 <br/>
                 Or three large dogs
                 <br/>
+                <br/>
                 Or three sitting dogs
+                <br/>
                 <br/>
                 Or a standing dog, a sitting dog, and a laying down dog
                 <br/>
-                Two small and a large don't make a pack
+                <br/>
+                Two small dogs and a large dog don't make a pack
+                <br/>
                 <br/>
                 The rules apply to ALL THREE attributes for each pack
 

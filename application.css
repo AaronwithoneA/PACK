@@ -109,6 +109,11 @@ time, mark, audio, video {
   display: flex;
   text-align: center;
   font-family: inherit;
+  font-size: 22px;
+}
+
+.description {
+  margin: 20px 0 20px 0;
 }
 
 .attribute-list {
@@ -118,10 +123,17 @@ time, mark, audio, video {
   flex-direction: column;
   width: 100%;
   font-family: serif;
+  margin-bottom: 20px;
+  font-size: 18px;
 }
 
 .attribute-list-container {
   width: 100%;
+}
+
+.additional-instructions {
+    font-size: 15px;
+    text-align: center;
 }
 
 .title-box {
