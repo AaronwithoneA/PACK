@@ -24,7 +24,7 @@ This app will consist of a single page containing 12 styled cards with pictures 
 
 There will be an instructions modal thats opened from a button on the top
 of the page.  It will include a description of the game, the 3 attributes,
-and visual examples of a valid and invalid pack
+and visual examples of a valid and invalid pack.
 
 ![wireframes](images/instruction_modaL.png)
 
