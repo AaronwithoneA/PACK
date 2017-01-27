@@ -9,6 +9,7 @@ class Board extends React.Component {
     this.state = {
       status: "game",
       match: "",
+      packs: [],
       cardList: [{
         size: "small",
         position: "standing",
@@ -90,64 +91,54 @@ class Board extends React.Component {
   checkMatch() {
     if (this.props.cards.length > 2) {
       const cards = this.props.cards;
-      if(this.checkSize(cards)) {
-        if(this.checkColor(cards)) {
-          if (this.checkPosition(cards)){
+      if (this.compareAttribute(cards, "size")) {
+        if (this.compareAttribute(cards, "color")) {
+          if (this.compareAttribute(cards, "position") && this.checkDuplicate() ) {
             return true;
           } else {
             return false;
           }
-        }else {
+        } else {
           return false;
         }
-      }else {
+      } else {
         return false;
       }
     }
     return "<";
   }
 
-  checkSize (cards) {
+  compareAttribute (cards, attribute) {
     return (
-      (cards[0].size === cards[1].size
-      && cards[1].size === cards[2].size) ||
-      (cards[0].size !== cards[1].size
-        && cards[1].size !== cards[2].size
-          && cards[0].size !== cards[2].size)
+      (cards[0][attribute] === cards[1][attribute]
+      && cards[1][attribute] === cards[2][attribute]) ||
+      (cards[0][attribute] !== cards[1][attribute]
+        && cards[1][attribute] !== cards[2][attribute]
+          && cards[0][attribute] !== cards[2][attribute])
     );
   }
 
-  checkColor(cards) {
-    return (
-      (cards[0].color === cards[1].color
-      && cards[1].color === cards[2].color) ||
-      (cards[0].color !== cards[1].color
-        && cards[1].color !== cards[2].color
-          && cards[0].color !== cards[2].color)
-    );
+  checkDuplicate () {
+    let newPack = true;
+    this.state.packs.forEach((pack) => {
+      let duplicateCards = 0;
+      pack.forEach((dog) => {
+        if (this.props.cards.indexOf(dog) !== -1) {
+          duplicateCards += 1;
+        }
+      });
+      if (duplicateCards > 2) {
+        newPack = false;
+      }
+    });
+    return newPack;
   }
 
-  checkPosition(cards) {
-    return (
-      (cards[0].position === cards[1].position
-      && cards[1].position === cards[2].position) ||
-      (cards[0].position !== cards[1].position
-        && cards[1].position !== cards[2].position
-          && cards[0].position !== cards[2].position)
-    );
-  }
-
-
-  validPack () {
+  addPack () {
     this.props.increasePackCount();
     setTimeout(() => {
-      console.log(this.props.setNumber);
       if (this.props.setNumber === 4) {
-        this.props.clearCount();
         this.gameOver();
-        this.setState({cardsList: this.state.cardList.sort(
-          () => .5 - Math.random())});
-        this.forceUpdate();
       }
     }, 1500);
   }
@@ -157,10 +148,11 @@ class Board extends React.Component {
       return;
     }
     else if (this.checkMatch()) {
+      this.state.packs.push(this.props.cards);
       this.setState({match: "yes"});
       setTimeout(() => this.setState({match: ""}), 2000);
       this.props.resetCards();
-      this.validPack();
+      this.addPack();
     }
     else {
       this.props.resetCards();
@@ -171,7 +163,13 @@ class Board extends React.Component {
 
   gameOver () {
     this.setState({status: "game over"});
-    setTimeout(() => this.setState({status: "game"}), 10000);
+    this.setState({cardsList: this.state.cardList.sort(
+      () => .5 - Math.random())});
+    setTimeout(() => {
+      this.setState({status: "game"});
+      this.props.clearCount();
+      this.setState({packs: []});
+    }, 10000);
   }
 
   render () {

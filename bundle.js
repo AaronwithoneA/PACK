@@ -26706,6 +26706,7 @@
 	    _this.state = {
 	      status: "game",
 	      match: "",
+	      packs: [],
 	      cardList: [{
 	        size: "small",
 	        position: "standing",
@@ -26779,9 +26780,9 @@
 	    value: function checkMatch() {
 	      if (this.props.cards.length > 2) {
 	        var cards = this.props.cards;
-	        if (this.checkSize(cards)) {
-	          if (this.checkColor(cards)) {
-	            if (this.checkPosition(cards)) {
+	        if (this.compareAttribute(cards, "size")) {
+	          if (this.compareAttribute(cards, "color")) {
+	            if (this.compareAttribute(cards, "position") && this.checkDuplicate()) {
 	              return true;
 	            } else {
 	              return false;
@@ -26796,74 +26797,83 @@
 	      return "<";
 	    }
 	  }, {
-	    key: 'checkSize',
-	    value: function checkSize(cards) {
-	      return cards[0].size === cards[1].size && cards[1].size === cards[2].size || cards[0].size !== cards[1].size && cards[1].size !== cards[2].size && cards[0].size !== cards[2].size;
+	    key: 'compareAttribute',
+	    value: function compareAttribute(cards, attribute) {
+	      return cards[0][attribute] === cards[1][attribute] && cards[1][attribute] === cards[2][attribute] || cards[0][attribute] !== cards[1][attribute] && cards[1][attribute] !== cards[2][attribute] && cards[0][attribute] !== cards[2][attribute];
 	    }
 	  }, {
-	    key: 'checkColor',
-	    value: function checkColor(cards) {
-	      return cards[0].color === cards[1].color && cards[1].color === cards[2].color || cards[0].color !== cards[1].color && cards[1].color !== cards[2].color && cards[0].color !== cards[2].color;
-	    }
-	  }, {
-	    key: 'checkPosition',
-	    value: function checkPosition(cards) {
-	      return cards[0].position === cards[1].position && cards[1].position === cards[2].position || cards[0].position !== cards[1].position && cards[1].position !== cards[2].position && cards[0].position !== cards[2].position;
-	    }
-	  }, {
-	    key: 'validPack',
-	    value: function validPack() {
+	    key: 'checkDuplicate',
+	    value: function checkDuplicate() {
 	      var _this2 = this;
+	
+	      var newPack = true;
+	      this.state.packs.forEach(function (pack) {
+	        var duplicateCards = 0;
+	        pack.forEach(function (dog) {
+	          if (_this2.props.cards.indexOf(dog) !== -1) {
+	            duplicateCards += 1;
+	          }
+	        });
+	        if (duplicateCards > 2) {
+	          newPack = false;
+	        }
+	      });
+	      return newPack;
+	    }
+	  }, {
+	    key: 'addPack',
+	    value: function addPack() {
+	      var _this3 = this;
 	
 	      this.props.increasePackCount();
 	      setTimeout(function () {
-	        console.log(_this2.props.setNumber);
-	        if (_this2.props.setNumber === 4) {
-	          _this2.props.clearCount();
-	          _this2.gameOver();
-	          _this2.setState({ cardsList: _this2.state.cardList.sort(function () {
-	              return .5 - Math.random();
-	            }) });
-	          _this2.forceUpdate();
+	        if (_this3.props.setNumber === 4) {
+	          _this3.gameOver();
 	        }
 	      }, 1500);
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
-	      var _this3 = this;
+	      var _this4 = this;
 	
 	      if (this.checkMatch() === "<") {
 	        return;
 	      } else if (this.checkMatch()) {
+	        this.state.packs.push(this.props.cards);
 	        this.setState({ match: "yes" });
 	        setTimeout(function () {
-	          return _this3.setState({ match: "" });
+	          return _this4.setState({ match: "" });
 	        }, 2000);
 	        this.props.resetCards();
-	        this.validPack();
+	        this.addPack();
 	      } else {
 	        this.props.resetCards();
 	        this.setState({ match: "no" });
 	        setTimeout(function () {
-	          return _this3.setState({ match: "" });
+	          return _this4.setState({ match: "" });
 	        }, 2000);
 	      }
 	    }
 	  }, {
 	    key: 'gameOver',
 	    value: function gameOver() {
-	      var _this4 = this;
+	      var _this5 = this;
 	
 	      this.setState({ status: "game over" });
+	      this.setState({ cardsList: this.state.cardList.sort(function () {
+	          return .5 - Math.random();
+	        }) });
 	      setTimeout(function () {
-	        return _this4.setState({ status: "game" });
+	        _this5.setState({ status: "game" });
+	        _this5.props.clearCount();
+	        _this5.setState({ packs: [] });
 	      }, 10000);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this5 = this;
+	      var _this6 = this;
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -26906,12 +26916,12 @@
 	          this.state.cardList.map(function (card, i) {
 	            return _react2.default.createElement(_card2.default, { card: card,
 	              key: i,
-	              receiveCard: _this5.props.receiveCard,
-	              removeCard: _this5.props.removeCard,
-	              setNumber: _this5.props.setNumber,
-	              cards: _this5.props.cards,
-	              status: _this5.state.status,
-	              match: _this5.state.match });
+	              receiveCard: _this6.props.receiveCard,
+	              removeCard: _this6.props.removeCard,
+	              setNumber: _this6.props.setNumber,
+	              cards: _this6.props.cards,
+	              status: _this6.state.status,
+	              match: _this6.state.match });
 	          })
 	        )
 	      );
