@@ -1,70 +1,65 @@
-## PACK (Dog themed implementation of the game SET)
+#PACK
+[Github Link][github]
+[github]: https://aaronwithonea.github.io/PACK
 
-### Background
+PACK  is a dog themed implementation of the classic card game SET.  The goal of the game is to identify packs(sets) of 3 dogs that are either all the same or all different across 3 attributes:
 
-The game SET is a clever matching game involving a board with 12 cards.  In the traditional game, each card contained squiggle shapes of varying colors, patterns, and quantities.  There are 1, 2 or 3 squiggles that are red, green, or blue, with solid, striped, or empty patterns.  The goal of the game is to choose sets of 3 cards where every card is exactly the same of different on each of the attributes.  For example, a set of 3 solid green squiggles, 2 solid green squiggles, and 1 solid green squiggle or 3 solid green squiggles, 2 striped blue squiggles, and 1 empty red squiggle would both be valid sets.  This version will instead consist of pictures of dogs and the attributes will be size(large, medium, small), color(black, white, brown) and position(sitting, standing, laying down).
+Size (small, medium or large)
+Coloring (dark, light, or mixed)
+Position (sitting, standing, or laying down)
 
-### Functionality & MVP  
+There are a total of 12 cards and the game is won after identifying 4 packs.  
 
-Users will be able to
+##How the Game was Built
 
-- [ ] Select and unselect cards chosen for each set until 3 cards are chosen, at which point all cards will be unselected.
-- [ ] Correct sets will be recorded until 4 sets have been identified and the game ends
+The game is built on matching logic that waits for three dogs to be selected and then determines whether the match
+is correct by progressively comparing each attribute across the three dogs.  The styling and responsive design of the game were achieved through use of CSS flex box, as well as CSS filters, transformations, and hover effects.  
 
-In addition, this project will include:
+![images](images/gae_photo.png)
 
-- [ ] An About modal describing the background and rules of the game
-- [ ] A production Readme
+The game additionally includes detailed verbal and visual instructions on gameplay
+in a React modal.  
 
-### Wireframes
+![images](images/modal.png)
 
-This app will consist of a single page containing 12 styled cards with pictures of dogs on them.  Additionally, there will be a link to the instructions modal and links to the game's Github page, my personal linkedin page, and eventually, a link to my personal website.  
+###Dwellings
 
-![wireframes](images/PACK.png)
+On the backend, dwellings are stored in the database with columns for id, owner_id, location, price, image_url, about_this, description, guest_limit, bedrooms, beds, and house_rules.
 
-There will be an instructions modal thats opened from a button on the top
-of the page.  It will include a description of the game, the 3 attributes,
-and visual examples of a valid and invalid pack.
+Dwelling index items are rendered in /home in the dwelling index within the search component.  Each item displays the image, location, and price and links to the dwelling show page.
+The dwelling component renders all information about the dwelling and reviews.
 
-![wireframes](images/instructions_modal.png)
+####Dwelling Component
 
-### Architecture and Technologies
+![image of dwelling](app/assets/images/dwelling_component.png)
 
-This project will be implemented with the following technologies:
+###Dwelling search
 
-- React and Redux for user interaction and DOM manipulation.
-- HTML and CSS for page structure and styling of cards and nav links.  
+There is an active search bar on /home that allows for search by maximum price and location.  The dwellings will responsively match selected filter.
 
-- Webpack to bundle and serve up the various scripts.
+####Search Component
+![image of search](app/assets/images/search_component)
+<img src="app/assets/images/search_componentpng">
 
-There will be two React components in this project:  
+###Bookings
 
-`board.jsx`: This file will handle the logic for the board, including matching cards, and deciding when the game has been won.  
+Logged in users can book dwellings for specific dates and number of guests by making bookings which are stored in the database. Bookings have columns for user_id, dwelling_id, guest_number, start_date, and end_date. Dwellings restrict their availability based on associated bookings.
+Bookings are rendered in /bookings and filtered for the logged in user who can view and cancel their bookings.
 
-`card.jsx':  This file will contain the logic for the individual card objects.  
+####Bookings index
+![image of bookings](app/assets/images/booking_component)
 
-### Implementation Timeline
+###Reviews
 
-**Day 1**: Configure all of the basic setup for the app including node and npm packages, webpack configuration, and the basic file tree.  
-- Get a green bundle with `webpack`
-- Design the overall object oriented structure, including the roles differentiation between board and card rules.
-- Research techniques for implementing interesting graphics when sets are collected and games are won.
+Logged in users can leave reviews for dwellings. Reviews are stored in the database with a user_id, dwelling_id, body, and rating.
+Reviews are rendered in the reviews component within the associated dwelling component.
 
-**Day 2**: Design the majority of the board logic while keeping in mind the general card structure.  
+####Reviews
+![image of reviews](app/assets/images/review_component)
 
-- Complete the majority of the board module.  
 
-**Day 3**: Build the card module and instructions modal.  
+###Dwelling creation
+Logged in users can create new dwelling listings under the "Become a Host" button on the navbar.  The dwelling creation form includes
+input fields for all information rendered in the dwelling component, including image upload.
 
-- Export a 'card' module that is used in the board module.  
-- Create and style instructions for the game that will pop up in a modal upon clicking a nav link.  
-
-**Day 4**: Collect beautiful photos of dogs with the appropriate qualities.  Complete all of the styling.
-
-- Style board and cards with photos of dogs.  
-
-### Bonus features
-
-Some anticipated updates are:
-
-- [ ] Create an interesting graphic for a game win condition involving a pack of dogs crossing from left to right on the screen.  
+![image of dwelling creation](app/assets/images/dwelling_creation)

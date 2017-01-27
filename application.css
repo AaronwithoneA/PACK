@@ -290,9 +290,3 @@ time, mark, audio, video {
   display: flex;
   margin: 8px 10px 0 10px;
 }
-
-#winning {
-  position: fixed;
-  background-color: transparent;
-  z-index: 0;
-}
