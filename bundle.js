@@ -26741,7 +26741,7 @@
 	        size: "large",
 	        position: "standing",
 	        color: "dark",
-	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485286635/large_standing_dark_xiiswa.jpg"
+	        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485547705/large_standing_dark_3_airdge.jpg"
 	      }, {
 	        size: "small",
 	        position: "laying",
