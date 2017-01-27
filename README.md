@@ -1,6 +1,6 @@
 #PACK
-[Pack iive][https://aaronwithonea.github.io/PACK]
-[github][https://github.com/AaronwithoneA/PACK]
+[Pack iive][github]
+[github]: https://github.com/AaronwithoneA/PACK
 
 PACK  is a dog themed implementation of the classic card game SET.  The goal of the game is to identify packs(sets) of 3 dogs that are either all the same or all different across 3 attributes:
 

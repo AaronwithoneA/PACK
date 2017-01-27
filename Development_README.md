@@ -39,9 +39,9 @@ This project will be implemented with the following technologies:
 
 There will be two React components in this project:  
 
-`board.jsx`: This file will handle the logic for the board, including matching cards, and deciding when the game has been won.  
+'board.jsx': This file will handle the logic for the board, including matching cards, and deciding when the game has been won.  
 
-`card.jsx':  This file will contain the logic for the individual card objects.  
+'card.jsx':  This file will contain the logic for the individual card objects.  
 
 ### Implementation Timeline
 
