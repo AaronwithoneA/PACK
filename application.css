@@ -146,23 +146,30 @@ time, mark, audio, video {
   font-family: serif;
   color: rgba(240, 240, 255, 0.7);
   letter-spacing: 1px;
+  left: -3%;
+
 }
 
 .modal-row-1 {
+  margin-bottom: 15px;
   display: flex;
   justify-content: center;
 }
 
 .modal-title {
+  position: relative;
   display: flex;
   text-align: center;
   font-family: inherit;
   font-size: 22px;
+
 }
 
 .description {
+  position: relative;
   margin: 20px 0 20px 0;
   font-size: 18px;
+  text-align: center;
 }
 
 .attribute-list {
@@ -171,8 +178,9 @@ time, mark, audio, video {
   align-items: center;
   flex-direction: column;
   width: 100%;
+  height: 120px;
   font-family: serif;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   font-size: 18px;
   list-style: none
 }
@@ -181,11 +189,48 @@ time, mark, audio, video {
   width: 100%;
 }
 
-.additional-instructions {
-    font-size: 18px;
-    text-align: center;
+
+.image-instructions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
 }
 
+.image-instruction-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.instruction-image-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.image-box {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.instruction-image {
+  width: 100;
+  height: 64;
+  object-fit: cover;
+  border-radius: 10px;
+  filter: brightness(92%);
+  margin: 8px;
+}
+
+.image-instruction-description {
+  width: 100%;
+  text-align: center;
+}
 .title-box {
   width: 300px;
   display: flex;

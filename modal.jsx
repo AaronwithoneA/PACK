@@ -29,15 +29,15 @@ class InstructionsModal extends React.Component {
         border          : '1px solid #777',
         padding         : '20px',
         zIndex          : 11,
-        width           : '35%',
+        width           : '500px',
         'min-width'     : '450px',
-        height          : '550px',
+        height          : '600px',
         margin          : '0 auto',
         display         : 'flex',
         'border-radius' :  '10px',
         background      :  '#777',
         'box-shadow'    :  '4px 0 20px black',
-        transform       :  'rotate(-8deg) translate(-2%, -30%)',
+        transform       :  'rotate(-8deg) translate(10%, -46%)',
         filter          :  'contrast(150%)'
       }
     };
@@ -85,7 +85,38 @@ class InstructionsModal extends React.Component {
                   <br/><br/>
                 </ul>
                 <div className='image-instructions'>
+                  <div className='image-instruction-section'>
+                    <div className='instruction-image-box'>
+                      <div className="image-box">
+                        <img className="instruction-image"
+                          src="http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485286005/large_laying_mixed_tbgpuo.jpg"></img>
+                      </div>
+                      <div className='image-box'>
+                        <img className="instruction-image"
+                          src="http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485290695/medium_sitting_mixed_gngkqg.jpg"></img>
+                      </div>
 
+                      <img className="instruction-image"
+                        src="http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485286886/Small_standing_mixed_lmcfzp.jpg"></img>
+                    </div>
+                    <div className='image-instruction-description'>
+                      This is a valid pack because all 3 dogs are DIFFERENT sizes (large, medium, small),
+                      the SAME coloring (mixed) and DIFFERENT positions (laying down, sitting, standing)
+
+                    </div>
+                  </div>
+                  <div className='image-instruction-section'>
+                    <div className='instruction-image-box'>
+                      <img className="instruction-image"src="http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485288262/medium_sitting_mixed_wklepv.png"></img>
+                      <img className="instruction-image"src="http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485287971/medum_standing_mixed_vmrode.jpg"></img>
+                      <img className="instruction-image"src="http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485288085/medium_sitting_light_tdthn1.jpg"></img>
+                    </div>
+                    <div className='image-instruction-description'>
+                      This is not a valid pack because although all 3 dogs are the SAME size (medium),
+                      they are NOT all the same of all different in coloring (mixed, mixed, light)
+                      or position (sitting, standing, sitting)
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

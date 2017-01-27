@@ -7,8 +7,9 @@ The game SET is a clever matching game involving a board with 12 cards.  In the 
 ### Functionality & MVP  
 
 Users will be able to
-- [ ] Start, pause, and reset the game board
+
 - [ ] Select and unselect cards chosen for each set until 3 cards are chosen, at which point all cards will be unselected.
+- [ ] Correct sets will be recorded until 4 sets have been identified and the game ends
 
 In addition, this project will include:
 
@@ -21,20 +22,26 @@ This app will consist of a single page containing 12 styled cards with pictures 
 
 ![wireframes](images/PACK.png)
 
+There will be an instructions modal thats opened from a button on the top
+of the page.  It will include a description of the game, the 3 attributes,
+and visual examples of a valid and invalid pack
+
+![wireframes](images/instruction_modaL.png)
+
 ### Architecture and Technologies
 
 This project will be implemented with the following technologies:
 
-- Javascript and Jquery for user interaction and DOM manipulation.
+- React and Redux for user interaction and DOM manipulation.
 - HTML and CSS for page structure and styling of cards and nav links.  
 
 - Webpack to bundle and serve up the various scripts.
 
-There will be two core javascript files in this project:  
+There will be two React components in this project:  
 
-`board.js`: This file will handle the logic for the board, including clicking cards, matching cards, and deciding when the game has been won.  
+`board.jsx`: This file will handle the logic for the board, including matching cards, and deciding when the game has been won.  
 
-`card.js':  This file will contain the logic for the individual card objects.  
+`card.jsx':  This file will contain the logic for the individual card objects.  
 
 ### Implementation Timeline
 
@@ -52,12 +59,9 @@ There will be two core javascript files in this project:
 - Export a 'card' module that is used in the board module.  
 - Create and style instructions for the game that will pop up in a modal upon clicking a nav link.  
 
-
 **Day 4**: Collect beautiful photos of dogs with the appropriate qualities.  Complete all of the styling.
 
 - Style board and cards with photos of dogs.  
-
-
 
 ### Bonus features
 
