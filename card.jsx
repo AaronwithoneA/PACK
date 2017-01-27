@@ -24,7 +24,6 @@ class Card extends React.Component {
       this.props.receiveCard(this.props.card);
       }
     if (this.state.clicked === true) {
-      console.log(this.state.clicked);
       this.setState({clicked: false});
       this.props.removeCard(this.props.card);
       this.forceUpdate();
