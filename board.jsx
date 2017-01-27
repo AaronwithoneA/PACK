@@ -20,7 +20,7 @@ class Board extends React.Component {
         size: "small",
         position: "laying",
         color: "mixed",
-        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485290904/small_laying_mixed_gonvr8.jpg"
+        image: "http://res.cloudinary.com/dg8v2pvxf/image/upload/v1485547386/small-laying-mixed2_ndwatt.jpg"
       },
       {
         size: "large",
