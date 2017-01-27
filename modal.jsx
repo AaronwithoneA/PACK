@@ -29,16 +29,16 @@ class InstructionsModal extends React.Component {
         border          : '1px solid #ccc',
         padding         : '20px',
         zIndex          : 11,
-        width           : '40%',
+        width           : '35%',
         'min-width'     : '450px',
         height          : '550px',
         margin          : '0 auto',
-        transform       : 'translate(-50%, -50%)',
+        // transform       : 'translate(-50%, -50%)',
         display         : 'flex',
         'border-radius' :  '10px',
-        'box-shadow'    :  '0px 3px 7px black',
-        'background-color' : '#DCDCDC'
-
+        background      :  '#777',
+        'box-shadow'    :  '0 35px 20px #777',
+        transform       :  'rotate(-8deg) translate(-2%, -30%)'
       }
     };
     this.closeModal = this.closeModal.bind(this);
@@ -68,12 +68,12 @@ class InstructionsModal extends React.Component {
           style={this.style}>
             <div className='modal-container'>
               <div className='modal-row-1'>
-                <h2 className='modal-title'>Find your packs</h2>
+                <h2 className='modal-title'>Unleash 4 Packs to Win</h2>
               </div>
               <div className="description">
-                The goal of the game is to pick sets of 3 furry friends
-                who are either ALL the same or ALL different in each of
-                three attributes:
+                A pack contains 3 dogs, where each of the following attributes
+                are either the same across three dogs, or completely
+                different:
               </div>
               <div className='attribute-list-container'>
                 <ul className="attribute-list">
@@ -85,9 +85,6 @@ class InstructionsModal extends React.Component {
                   <br/><br/>
                 </ul>
                 <div className='additional-instructions'>
-                  A pack contains 3 dogs, where each of the attributes
-                  are either the same across three dogs, or completely
-                  different
                 </div>
               </div>
             </div>

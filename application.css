@@ -45,7 +45,7 @@ time, mark, audio, video {
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
-  filter: contrast(130%);
+  filter: contrast(130%) brightness(92%);
 }
 
 .card-image-clicked {
@@ -144,6 +144,8 @@ time, mark, audio, video {
   justify-content: flex-start;
   padding: 25px;
   font-family: serif;
+  color: rgba(240, 240, 255, 0.7);
+  letter-spacing: 1px;
 }
 
 .modal-row-1 {
@@ -166,12 +168,13 @@ time, mark, audio, video {
 .attribute-list {
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   width: 100%;
   font-family: serif;
   margin-bottom: 20px;
   font-size: 18px;
+  list-style: none
 }
 
 .attribute-list-container {

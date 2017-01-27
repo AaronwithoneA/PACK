@@ -26774,14 +26774,38 @@
 	    return _this;
 	  }
 	
+	  // checkMatch() {
+	  //   if (this.props.cards.length > 2) {
+	  //     const cards = this.props.cards;
+	  //     if ((cards[0].size === cards[1].size && cards[1].size === cards[2].size) ||
+	  //       (cards[0].size !== cards[1].size && cards[1].size !== cards[2].size)) {
+	  //         if ((cards[0].color === cards[1].color) && (cards[1].color === cards[2].color) ||
+	  //           (cards[0].color !== cards[1].color) && (cards[1].color !== cards[2].color)) {
+	  //             if ((cards[0].position === cards[1].position) && (cards[1].position === cards[2].position) ||
+	  //               (cards[0].position !== cards[1].position) && (cards[1].position !== cards[2].position)) {
+	  //                 return true;
+	  //             } else {
+	  //               return false;
+	  //             }
+	  //         }else {
+	  //           return false;
+	  //         }
+	  //     }else {
+	  //         return false;
+	  //     }
+	  //   }
+	  //   return "<";
+	  // }
+	
 	  _createClass(Board, [{
 	    key: 'checkMatch',
 	    value: function checkMatch() {
 	      if (this.props.cards.length > 2) {
 	        var cards = this.props.cards;
-	        if (cards[0].size === cards[1].size && cards[1].size === cards[2].size || cards[0].size !== cards[1].size && cards[1].size !== cards[2].size) {
-	          if (cards[0].color === cards[1].color && cards[1].color === cards[2].color || cards[0].color !== cards[1].color && cards[1].color !== cards[2].color) {
-	            if (cards[0].position === cards[1].position && cards[1].position === cards[2].position || cards[0].position !== cards[1].position && cards[1].position !== cards[2].position) {
+	        if (this.checkSize(cards)) {
+	          debugger;
+	          if (this.checkColor(cards)) {
+	            if (this.checkPosition(cards)) {
 	              return true;
 	            } else {
 	              return false;
@@ -26794,6 +26818,21 @@
 	        }
 	      }
 	      return "<";
+	    }
+	  }, {
+	    key: 'checkSize',
+	    value: function checkSize(cards) {
+	      return cards[0].size === cards[1].size && cards[1].size === cards[2].size || cards[0].size !== cards[1].size && cards[1].size !== cards[2].size && cards[0].size !== cards[2].size;
+	    }
+	  }, {
+	    key: 'checkColor',
+	    value: function checkColor(cards) {
+	      return cards[0].color === cards[1].color && cards[1].color === cards[2].color || cards[0].color !== cards[1].color && cards[1].color !== cards[2].color && cards[0].color !== cards[2].color;
+	    }
+	  }, {
+	    key: 'checkPosition',
+	    value: function checkPosition(cards) {
+	      return cards[0].position === cards[1].position && cards[1].position === cards[2].position || cards[0].position !== cards[1].position && cards[1].position !== cards[2].position && cards[0].position !== cards[2].position;
 	    }
 	  }, {
 	    key: 'validPack',
@@ -28413,16 +28452,16 @@
 	        border: '1px solid #ccc',
 	        padding: '20px',
 	        zIndex: 11,
-	        width: '40%',
+	        width: '35%',
 	        'min-width': '450px',
 	        height: '550px',
 	        margin: '0 auto',
-	        transform: 'translate(-50%, -50%)',
+	        // transform       : 'translate(-50%, -50%)',
 	        display: 'flex',
 	        'border-radius': '10px',
-	        'box-shadow': '0px 3px 7px black',
-	        'background-color': '#DCDCDC'
-	
+	        background: '#777',
+	        'box-shadow': '0 35px 20px #777',
+	        transform: 'rotate(-8deg) translate(-2%, -30%)'
 	      }
 	    };
 	    _this.closeModal = _this.closeModal.bind(_this);
@@ -28468,13 +28507,13 @@
 	              _react2.default.createElement(
 	                'h2',
 	                { className: 'modal-title' },
-	                'Find your packs'
+	                'Unleash 4 Packs to Win'
 	              )
 	            ),
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'description' },
-	              'The goal of the game is to pick sets of 3 furry friends who are either ALL the same or ALL different in each of three attributes:'
+	              'A pack contains 3 dogs, where each of the following attributes are either the same across three dogs, or completely different:'
 	            ),
 	            _react2.default.createElement(
 	              'div',
@@ -28502,11 +28541,7 @@
 	                _react2.default.createElement('br', null),
 	                _react2.default.createElement('br', null)
 	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'additional-instructions' },
-	                'A pack contains 3 dogs, where each of the attributes are either the same across three dogs, or completely different'
-	              )
+	              _react2.default.createElement('div', { className: 'additional-instructions' })
 	            )
 	          )
 	        )

@@ -87,28 +87,80 @@ class Board extends React.Component {
       () => .5 - Math.random())});
   }
 
+  // checkMatch() {
+  //   if (this.props.cards.length > 2) {
+  //     const cards = this.props.cards;
+  //     if ((cards[0].size === cards[1].size && cards[1].size === cards[2].size) ||
+  //       (cards[0].size !== cards[1].size && cards[1].size !== cards[2].size)) {
+  //         if ((cards[0].color === cards[1].color) && (cards[1].color === cards[2].color) ||
+  //           (cards[0].color !== cards[1].color) && (cards[1].color !== cards[2].color)) {
+  //             if ((cards[0].position === cards[1].position) && (cards[1].position === cards[2].position) ||
+  //               (cards[0].position !== cards[1].position) && (cards[1].position !== cards[2].position)) {
+  //                 return true;
+  //             } else {
+  //               return false;
+  //             }
+  //         }else {
+  //           return false;
+  //         }
+  //     }else {
+  //         return false;
+  //     }
+  //   }
+  //   return "<";
+  // }
+
   checkMatch() {
     if (this.props.cards.length > 2) {
       const cards = this.props.cards;
-      if ((cards[0].size === cards[1].size && cards[1].size === cards[2].size) ||
-        (cards[0].size !== cards[1].size && cards[1].size !== cards[2].size)) {
-          if ((cards[0].color === cards[1].color) && (cards[1].color === cards[2].color) ||
-            (cards[0].color !== cards[1].color) && (cards[1].color !== cards[2].color)) {
-              if ((cards[0].position === cards[1].position) && (cards[1].position === cards[2].position) ||
-                (cards[0].position !== cards[1].position) && (cards[1].position !== cards[2].position)) {
-                  return true;
-              } else {
-                return false;
-              }
-          }else {
+      if(this.checkSize(cards)) {
+        debugger
+        if(this.checkColor(cards)) {
+          if (this.checkPosition(cards)){
+            return true;
+          } else {
             return false;
           }
-      }else {
+        }else {
           return false;
+        }
+      }else {
+        return false;
       }
     }
     return "<";
   }
+
+  checkSize (cards) {
+    return (
+      (cards[0].size === cards[1].size
+      && cards[1].size === cards[2].size) ||
+      (cards[0].size !== cards[1].size
+        && cards[1].size !== cards[2].size
+          && cards[0].size !== cards[2].size)
+    );
+  }
+
+  checkColor(cards) {
+    return (
+      (cards[0].color === cards[1].color
+      && cards[1].color === cards[2].color) ||
+      (cards[0].color !== cards[1].color
+        && cards[1].color !== cards[2].color
+          && cards[0].color !== cards[2].color)
+    );
+  }
+
+  checkPosition(cards) {
+    return (
+      (cards[0].position === cards[1].position
+      && cards[1].position === cards[2].position) ||
+      (cards[0].position !== cards[1].position
+        && cards[1].position !== cards[2].position
+          && cards[0].position !== cards[2].position)
+    );
+  }
+
 
   validPack () {
     this.props.increasePackCount();
