@@ -26,19 +26,19 @@ class InstructionsModal extends React.Component {
         left            : '50%',
         right           : '50%',
         bottom          : '50%',
-        border          : '1px solid #ccc',
+        border          : '1px solid #777',
         padding         : '20px',
         zIndex          : 11,
         width           : '35%',
         'min-width'     : '450px',
         height          : '550px',
         margin          : '0 auto',
-        // transform       : 'translate(-50%, -50%)',
         display         : 'flex',
         'border-radius' :  '10px',
         background      :  '#777',
-        'box-shadow'    :  '0 35px 20px #777',
-        transform       :  'rotate(-8deg) translate(-2%, -30%)'
+        'box-shadow'    :  '4px 0 20px black',
+        transform       :  'rotate(-8deg) translate(-2%, -30%)',
+        filter          :  'contrast(150%)'
       }
     };
     this.closeModal = this.closeModal.bind(this);
@@ -84,7 +84,8 @@ class InstructionsModal extends React.Component {
                   <li>Position   (standing, sitting, laying down)</li>
                   <br/><br/>
                 </ul>
-                <div className='additional-instructions'>
+                <div className='image-instructions'>
+
                 </div>
               </div>
             </div>

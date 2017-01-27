@@ -28449,19 +28449,19 @@
 	        left: '50%',
 	        right: '50%',
 	        bottom: '50%',
-	        border: '1px solid #ccc',
+	        border: '1px solid #777',
 	        padding: '20px',
 	        zIndex: 11,
 	        width: '35%',
 	        'min-width': '450px',
 	        height: '550px',
 	        margin: '0 auto',
-	        // transform       : 'translate(-50%, -50%)',
 	        display: 'flex',
 	        'border-radius': '10px',
 	        background: '#777',
-	        'box-shadow': '0 35px 20px #777',
-	        transform: 'rotate(-8deg) translate(-2%, -30%)'
+	        'box-shadow': '4px 0 20px black',
+	        transform: 'rotate(-8deg) translate(-2%, -30%)',
+	        filter: 'contrast(150%)'
 	      }
 	    };
 	    _this.closeModal = _this.closeModal.bind(_this);
@@ -28541,7 +28541,7 @@
 	                _react2.default.createElement('br', null),
 	                _react2.default.createElement('br', null)
 	              ),
-	              _react2.default.createElement('div', { className: 'additional-instructions' })
+	              _react2.default.createElement('div', { className: 'image-instructions' })
 	            )
 	          )
 	        )
